@@ -28,6 +28,7 @@ os.makedirs(image_folder2, exist_ok=True)
 
 # Crear encabezado reordenado
 header = []
+header.append("image_path")  # Agregar columna para la ruta de la imagen 
 for i in range(21):  # 21 landmarks
     header.extend([f"x{i}", f"y{i}", f"z{i}"])
 header.append("Label")  # Agregar columna para la etiqueta
@@ -101,10 +102,7 @@ while cap.isOpened():
             #data_row.append(image_name)
           
 
-            # Guardar en el archivo CSV
-            with open(output_file, mode="a", newline="") as file:
-                writer = csv.writer(file)
-                writer.writerow(data_row)
+            
 
              # Crear el nombre de la imagen usando el formato user_label
             image_name = f"{username}.png"
@@ -113,10 +111,37 @@ while cap.isOpened():
             # Guardar imágenes en sus respectivas carpetas
             image_path = os.path.join(image_folder, image_name)
             keypoints_image_path = os.path.join(image_folder2, keypoints_image_name)
-
-            cv2.imwrite(image_path, frame)  # Imagen original
-            cv2.imwrite(keypoints_image_path, frame_keypoints)  # Imagen con puntos clave
             
+            #guardar imagen original
+            if not os.path.exists(image_path):
+                cv2.imwrite(image_path, frame)  # Si no existe, guarda la imagen original
+                cv2.imwrite(keypoints_image_path, frame_keypoints)  # Imagen con puntos clave
+                print(f"Imagen guardada en: {image_path}")
+            else:
+                # Si existe, crea un nuevo nombre agregando un sufijo numérico
+                base_name, extension = os.path.splitext(image_path)
+                base_namekey, extension = os.path.splitext(keypoints_image_path)
+                counter = 2
+                image_path = f"{base_name}_{counter}{extension}"
+                keypoints_image_path = f"{base_namekey}_{counter}{extension}"
+                # Continúa incrementando el número hasta que no exista el archivo
+                while os.path.exists(image_path):
+                    counter += 1
+                    image_path = f"{base_name}_{counter}{extension}"
+                
+                # Guarda la imagen con el nuevo nombre
+                cv2.imwrite(image_path, frame)
+                cv2.imwrite(keypoints_image_path, frame_keypoints)  # Imagen con puntos clave
+                print(f"Imagen guardada con nuevo nombre: {image_path}")         
+
+            
+            # Agregar la ruta de la imagen al principio de la lista
+            data_row.insert(0, image_path)
+
+            # Guardar en el archivo CSV
+            with open(output_file, mode="a", newline="") as file:
+                writer = csv.writer(file)
+                writer.writerow(data_row)
 
             print(f"Datos guardados con etiqueta '{username}'.")
 
