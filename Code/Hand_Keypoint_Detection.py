@@ -30,7 +30,7 @@ os.makedirs(image_folder2, exist_ok=True)
 header = []
 for i in range(21):  # 21 landmarks
     header.extend([f"x{i}", f"y{i}", f"z{i}"])
-header.append("label")  # Agregar columna para la etiqueta
+header.append("Label")  # Agregar columna para la etiqueta
 header.append("username") # Agregar columna para la username
 
 
