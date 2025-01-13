@@ -15,5 +15,9 @@ La simbología correspondiente es la siguiente
 
 Si se desea iniciar de nuevo es posible remplazar el CSV, con lo que debemos eliminar las imágenes que se han guardado en las carpetas "Saved_images" y "Saved_images2"
 
+## Liberías necesarias:
+Talves necesites instalar las librerías necesarias para correr la aplicación, usando pip sería: 
+pip install opencv-python  mediapipe
+
 
 
