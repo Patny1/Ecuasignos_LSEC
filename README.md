@@ -20,4 +20,9 @@ Talves necesites instalar las librerías necesarias para correr la aplicación, 
 pip install opencv-python  mediapipe
 
 
+## QUIERES AYUDARNOS A CONSTRUIR UNA BASE DE DATOS CON LENGUA DE SEÑAS ECUATORIANA?
+Si quieres ser parte de este proyecto y ayudarnos a construir una base de datos con imágenes de lengua de señas, nos ayudarías a desarrollar nuevas herramientas tecnológicas para contribuir al aprendizaje de LSEC (Lengua de Señas Ecuatoriana)
+Puedes enviarnos tus imágenes al correo: pnconstante@espe.edu.ec
+
+
 
